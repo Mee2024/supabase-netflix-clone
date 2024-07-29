@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { ThemeProvider } from "components/material-tailwind-theme-provider";
+import ReactQueryClientProvider from "config/ReactQueryClientProvider";
+import Header from "components/header";
+import Footer from "components/footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,8 +19,26 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
+    <ReactQueryClientProvider>
+    <ThemeProvider>
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+    <head>
+          <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+            integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+            crossOrigin="anonymous"
+            referrerPolicy="no-referrer"
+          />
+        </head>
+      <body className={inter.className}>
+        <Header/>
+      
+        {children}
+        <Footer/>
+        </body>
     </html>
+    </ThemeProvider>
+    </ReactQueryClientProvider>
   );
 }
